@@ -10,3 +10,7 @@ def home(request):
 class HomeView(ListView): # pass in ListView
 	model = Post #so our post will appear as a list on homepage
 	template_name = 'home.html' #home html template already created
+
+class ArticleDetailView(DetailView):
+	model = Post
+	template_name = 'article_details.html'
