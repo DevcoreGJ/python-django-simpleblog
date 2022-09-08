@@ -2,7 +2,7 @@
 
 <ul>
 {% for post in object_list %} <!--database is post model -->
-	<li>{{ post.title }} - {{ post.author }}<br/>
+	<li>{{ post.title }} - {{ post.author}}<br/>
 	{{ post.body }}</li>
 {% endfor %}
 </ul>
