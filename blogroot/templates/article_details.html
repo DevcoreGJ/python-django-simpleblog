@@ -1,5 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
 <h1>{{ post.title }}</h1> <!--blog post title referenced -->
 <h4>By: {{ post.author.username }} </h4> <!-- referenced the defined user name of the author -->
 <hr>
 <br/>
 <p> {{ post.body }}</p> <!-- blog title -->
+
+<a href="{% url 'home' %}">Back to home</a>
+
+{% endblock %}
