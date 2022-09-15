@@ -1,10 +1,18 @@
 {% extends 'base.html' %}
+<div class="container-fluid">
 {% block content %}
+<div class="card">
+<div class="card-body">
+<h1 class="card-title">{{ post.title }}</h1> <!--blog post title referenced -->
+<h2 class="card-subtitle mb-2 text-muted">By: {{ post.author.username }}</h2>
 
-<h1>{{ post.title }}</h1> <!--blog post title referenced -->
-<h4>By: {{ post.author.username }} <small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a></small></h4> <!-- referenced the defined user name of the author -->
+<small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a> 
+<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a></small></h4> <!-- referenced the defined user name of the author -->
 <hr>
 <br/>
-<p> {{ post.body }}</p> <!-- blog title -->
+<p class="card-text"> {{ post.body }}</p> <!-- blog title -->
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
 {% endblock %}
+</div>
+</div>
+</div>

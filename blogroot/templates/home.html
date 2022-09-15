@@ -3,15 +3,36 @@
 {% block content %}
 
 <title> {% block title %} Apollo Blog {% endblock %} </title>
+<body>
+	
+<div class="container-fluid">
 
-<h1>Post</h1>
+
+<div class="container">
+<div class="col px-lg-4">
+<h1 class="display-1">Posts:</h1> <br />
+</div>
+</div>
 
 <ul>
 {% for post in object_list %} <!--database is post model -->
-	<li><a href="{% url 'article_detail' post.pk %}">{{ post.title }}</a> <!-- convert anchor tag to convert blog title to hyperlink to details page, dynamically assigned !-->
-	 - {{ post.author.username}} - <small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a></small> <br/>
-	{{ post.body }}</li>
+
+<div class="card">
+	<div class="card-body">
+		<a  href="{% url 'article_detail' post.pk %}"> 
+		<h2 class="card-title">{{ post.title }}</h2></a> <!-- convert anchor tag to convert blog title to hyperlink to details page, dynamically assigned !-->
+	</div>
+	 	
+	 	<h3 class="card-subtitle mb-2 text-muted"> - {{ post.author.username }} </h3>
+	 	<p class ="card-text"> {{ post.body }} </p> <br />
+	 	
+	 	<small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+	 	
+	 	<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a></small>
+	</div>
+	
 {% endfor %}
 </ul>
+</body>
 
 {% endblock %}
