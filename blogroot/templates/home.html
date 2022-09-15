@@ -9,7 +9,7 @@
 <ul>
 {% for post in object_list %} <!--database is post model -->
 	<li><a href="{% url 'article_detail' post.pk %}">{{ post.title }}</a> <!-- convert anchor tag to convert blog title to hyperlink to details page, dynamically assigned !-->
-	 - {{ post.author.username}} - <a href="{% url 'update_post' post.pk %}">(Edit)</a> <br/>
+	 - {{ post.author.username}} - <small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a></small> <br/>
 	{{ post.body }}</li>
 {% endfor %}
 </ul>
