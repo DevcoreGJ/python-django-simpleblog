@@ -21,15 +21,35 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'home' %}">Home<span></span></a>
       </li>
+      {% if user.is_authenticated %}
+
       <li class="nav-item">
         <a class="nav-link" href="{% url 'add_post' %}">Add Post</a>
       </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+
+      {% else %}
+
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'register' %}">Register</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      
+      {% endif %}
+      
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
       <!--<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Dropdown link-->
+        
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="#">Action</a>
