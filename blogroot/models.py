@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import datetime, date
 
 # Create your models here.
 from django.contrib.auth.models import User
@@ -10,6 +11,7 @@ class Post(models.Model):
 	author = models.ForeignKey(User, on_delete=models.CASCADE) #if user is deleted all related posts are
 	body = models.TextField() #input field for text
 	name = "Apollo Blog"
+	post_date = models.DateField(auto_now_add = True)
 	 #
 
 	def __str__(self):
