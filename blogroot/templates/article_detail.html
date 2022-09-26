@@ -6,7 +6,7 @@
 <div class="card-body">
 <h1 class="card-title">{{ post.title }}</h1> <!--blog post title referenced -->
 <h2 class="card-subtitle mb-2 text-muted">By: {{ post.author.username }} - 
-{{post.post_date}}</h2>
+{{post.post_date}} - {{ post.category }}</h2>
 
 <small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a> 
 <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a></small></h4> <!-- referenced the defined user name of the author -->

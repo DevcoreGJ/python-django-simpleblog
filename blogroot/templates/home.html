@@ -23,7 +23,7 @@
 		<h2 class="card-title">{{ post.title }}</h2></a> <!-- convert anchor tag to convert blog title to hyperlink to details page, dynamically assigned !-->
 	</div>
 	 	
-	 	<h3 class="card-subtitle mb-2 text-muted"> - {{ post.author.username }} </h3>
+	 	<h3 class="card-subtitle mb-2 text-muted"> - {{ post.author.username }} - {{ post.category }} </h3>
 	 	<p class ="card-text"> {{ post.body | slice:":200"|safe }} </p> <br /> 
 	 	{% if user.is_authenticated %}
 	 		<small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a>
