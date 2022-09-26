@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 <div class="container-fluid">
 {% block content %}
+{% if user.is_authenticated %}
 <div class="card">
 <div class="card-body">
 <h1 class="card-title">{{ post.title }}</h1> <!--blog post title referenced -->
@@ -13,6 +14,22 @@
 <br/>
 <p class="card-text"> {{ post.body }}</p> <!-- blog title -->
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+
+{% else %}
+
+<div class="card">
+<div class="card-body">
+<h1 class="card-title">{{ post.title }}</h1> <!--blog post title referenced -->
+<h2 class="card-subtitle mb-2 text-muted">By: {{ post.author.username }} - 
+{{post.post_date}}</h2>
+
+<hr>
+<br/>
+<p class="card-text"> {{ post.body }}</p> <!-- blog title -->
+<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+
+{% endif %}
+
 {% endblock %}
 </div>
 </div>

@@ -25,10 +25,11 @@
 	 	
 	 	<h3 class="card-subtitle mb-2 text-muted"> - {{ post.author.username }} </h3>
 	 	<p class ="card-text"> {{ post.body }} </p> <br />
+	 	{% if user.is_authenticated %}
+	 		<small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a>
 	 	
-	 	<small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a>
-	 	
-	 	<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a></small>
+	 		<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a></small>
+	 	{% endif %}
 	</div>
 	
 {% endfor %}

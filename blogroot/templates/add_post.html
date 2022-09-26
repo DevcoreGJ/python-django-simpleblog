@@ -3,6 +3,8 @@
 {% block title %}Create A New Blog Post!{% endblock %}
 {% block content %}
 
+{% if user.is_authenticated %}
+
 <h1>Add Blog A Post</h1>
 <br /> <br />
 <div class="form-group">
@@ -12,4 +14,11 @@
 		<button class="btn btn-primary">Post</button>
 </div>
 
+{% else %}
+
+	You are not allowed here! (and you know it...)
+
+	<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+
+	{% endif %}
 {% endblock %}
