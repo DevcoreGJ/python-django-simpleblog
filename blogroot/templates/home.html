@@ -19,20 +19,24 @@
 
 <div class="card">
 	<div class="card-body">
-		<a  href="{% url 'article_detail' post.pk %}"> 
+		<li><a  href="{% url 'article_detail' post.pk %}"> 
 		<h2 class="card-title">{{ post.title }}</h2></a> <!-- convert anchor tag to convert blog title to hyperlink to details page, dynamically assigned !-->
 	</div>
 	 	
 	 	<h3 class="card-subtitle mb-2 text-muted"> - {{ post.author.username }} </h3>
-	 	<p class ="card-text"> {{ post.body }} </p> <br />
+	 	<p class ="card-text"> {{ post.body | slice:":200"|safe }} </p> <br /> 
 	 	{% if user.is_authenticated %}
 	 		<small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a>
 	 	
-	 		<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a></small>
+	 		<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a>
 	 	{% endif %}
-	</div>
+
+	 </small>  <br />
+	
+</div>
 	
 {% endfor %}
+
 </ul>
 </body>
 

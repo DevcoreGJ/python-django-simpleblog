@@ -12,7 +12,7 @@
 <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a></small></h4> <!-- referenced the defined user name of the author -->
 <hr>
 <br/>
-<p class="card-text"> {{ post.body }}</p> <!-- blog title -->
+<p class="card-text"> {{ post.body|safe }}</p> <!-- blog title -->
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
 
 {% else %}
@@ -25,7 +25,7 @@
 
 <hr>
 <br/>
-<p class="card-text"> {{ post.body }}</p> <!-- blog title -->
+<p class="card-text"> {{ post.body|safe }}</p> <!-- blog title -->
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
 
 {% endif %}
