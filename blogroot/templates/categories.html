@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<title> {% block title %} Apollo Blog {% endblock %} </title>
+<body>
+	
+<div class="container-fluid">
+
+
+<div class="container">
+<div class="col px-lg-4">
+
+{% if category_posts %}
+
+<h1 class="display-1">Categories:</h1> <br />
+</div>
+</div>
+
+<h2 class="dispay-2"> {{ cats }} </h2>
+
+
+{% for post in category_posts %} <!--fiters by selected category -->
+
+<div class="card">
+	<div class="card-body">
+		<li><a  href="{% url 'article_detail' post.pk %}"> 
+		<h2 class="card-title">{{ post.title }}</h2></a> <!-- convert anchor tag to convert blog title to hyperlink to details page, dynamically assigned -->
+	</div>
+	 	
+	 	<h3 class="card-subtitle mb-2 text-muted"> - {{ post.author.username }} </h3>
+	 	<p class ="card-text"> {{ post.body | slice:":200"|safe }} </p> <br /> 
+	 	{% if user.is_authenticated %}
+	 		<small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+	 	
+	 		<a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a>
+	 	{% endif %}
+
+	 </small>  <br />
+
+</div>
+	
+{% endfor %}
+
+
+</body>
+
+{% else %}
+
+<h1 class="display-1">I'm sorry this category doesn't exist... </h1>
+
+{% endif %}
+{% endblock %}
