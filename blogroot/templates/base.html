@@ -21,46 +21,55 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'home' %}">Home<span></span></a>
       </li>
+
       {% if user.is_authenticated %}
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'add_post' %}">Add Post</a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add_post' %}">Add Post</a>
+        </li>
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
 
       {% else %}
 
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'register' %}">Register</a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'login' %}">Login</a>
-      </li>
-      
-      {% endif %}
-      
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <!--<li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link-->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register' %}">Register</a>
+        </li>
         
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
+
+      {% endif %}
+
+      <!-- Category Menu Code -->
+      {% if cat_menu %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Category
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            {% for item in cat_menu %}
+              <a class="dropdown-item "href="{% url 'category' item|slugify %}">{{ item }}</a>
+            {% endfor %}
+          
+          </div>
+        </li>
+      
+      {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'category-list' %}">Categories</a>
+        </li>
+
+      {% endif %}
     </ul>
   </div>
 </nav>

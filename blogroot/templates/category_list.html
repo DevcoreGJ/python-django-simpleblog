@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1 class="card-title" align = center> {% block title %} Blog Category {% endblock %} </h1> <!--blog post title referenced -->
+
+{% for item in cat_menu_list %}
+<div class="container-fluid">
+<div class="card">
+<div class="card-body">
+
+	<h4 align = center><a class="dropdown-item" href="{% url 'category' item|slugify %}">{{ item }}</a></h4>
+</div>
+</div>
+</div>
+{% endfor %}
+
+{% else %}
+
+You are not allowed here! (and you know it...)<br />
+	<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+
+{% endif %}
+{% endblock %}

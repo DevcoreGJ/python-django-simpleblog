@@ -5,18 +5,18 @@
 
 {% if user.is_authenticated %}
 
-<h1>Add Blog A Post</h1>
+<h1 class="display-1"align= center>Add Blog A Post</h1>
 <br /> <br />
-<div class="form-group">
+<div class="form-group" align= center>
 	<form method="POST">
 		{% csrf_token %}
 		{{ form.as_p }}
-		<button class="btn btn-primary">Post</button>
+		<button class="btn btn-primary" align= center>Post</button>
 </div>
 
 {% else %}
 
-	You are not allowed here! (and you know it...)<br />
+	<p>You are not allowed here! (and you know it...)</p><br />
 	<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
 
 	{% endif %}

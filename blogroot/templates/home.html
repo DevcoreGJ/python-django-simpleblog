@@ -6,25 +6,21 @@
 <body>
 	
 <div class="container-fluid">
-
-
-<div class="container">
-<div class="col px-lg-4">
-<h1 class="display-1">Posts:</h1> <br />
-</div>
-</div>
+<h1 class="display-1"align= center>Posts:</h1> <br />
 
 <ul>
 {% for post in object_list %} <!--database is post model -->
 
-<div class="card">
-	<div class="card-body">
+<div class="card" align= center>
+	<div class="card-body"align= center>
 		<li><a  href="{% url 'article_detail' post.pk %}"> 
-		<h2 class="card-title">{{ post.title }}</h2></a> <!-- convert anchor tag to convert blog title to hyperlink to details page, dynamically assigned !-->
-	</div>
+		<h1 class="card-title" align= center>{{ post.title }}</h1></a> <!-- convert anchor tag to convert blog title to hyperlink to details page, dynamically assigned !-->
+</div>
 	 	
-	 	<h3 class="card-subtitle mb-2 text-muted"> - {{ post.author.username }} - <a href="{% url 'category' post.category|slugify %}"> {{ post.category }} </a></h3>
-	 	<p class ="card-text"> {{ post.body | slice:":200"|safe }} </p> <br /> 
+	 	<h4 class="card-subtitle mb-2 text-muted" align= center> - {{ post.author.username }} - <a href="{% url 'category' post.category|slugify %}"> {{ post.category }} </a></h4>
+	 	
+	 	<p class ="card-text" align= center> {{ post.body | slice:":200"|safe }} </p> <br />
+	 	
 	 	{% if user.is_authenticated %}
 	 		<small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a>
 	 	
@@ -38,6 +34,12 @@
 {% endfor %}
 
 </ul>
+<!--
+{% for item in cat_menu %}
+	{{ item }}<br />
+{% endfor%}
+{{cat_menu}}
+
 </body>
 
 {% endblock %}

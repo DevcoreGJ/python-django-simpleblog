@@ -3,13 +3,13 @@
 {% block title %}Register{% endblock %}
 {% block content %}
 
-<h1>Register</h1>
+<h1 align= center>Register</h1>
 <br /> <br />
-<div class="form-group">
-	<form method="POST">
+<div class="form-group" align=center>
+	<form method="POST" align=center>
 		{% csrf_token %}
 		{{ form.as_p }}
-		<button class="btn btn-primary">Register</button>
+		<button class="btn btn-primary" align=center>Register</button>
 </div>
 
 {% endblock %}
