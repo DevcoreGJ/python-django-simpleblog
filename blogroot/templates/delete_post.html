@@ -2,6 +2,7 @@
 {% block title %}Delete Blog Post!{% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
+	{% if user.id == post.author.id%}
 <h1>Update Blog Post</h1>
 <br /><br />
 <h3>Delete: {{ post.title }}</h3><br /><br />
@@ -14,10 +15,10 @@
 		<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
 </div>
 {% else %}
-
 You are not allowed here and you know it.
 
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
 
 {% endif %}
+	{% endif %}
 {% endblock %}

@@ -16,7 +16,9 @@ class Category(models.Model):
 class Post(models.Model):
 	title = models.CharField(max_length=255) #max char length
 	title_tag = models.CharField(max_length=255)
-	author = models.ForeignKey(User, on_delete=models.CASCADE) #if user is deleted all related posts are
+	#author = models.CharField(max_length=50)
+	#author = models.ForeignKey(User, on_delete=models.NULL) #if user is deleted all related posts are
+	author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 	body = models.TextField() #input field for text
 	name = "Apollo Blog"
 	post_date = models.DateField(auto_now_add = True)

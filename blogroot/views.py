@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import Post, Category
+from .models import Post, Category, User
 from .forms import PostForm, EditForm
 from django.urls import reverse_lazy
 
@@ -27,7 +27,7 @@ def CategoryListView(request):
 	return render(request, 'category_list.html', {'cat_menu_list':cat_menu_list})
 
 def CategoryView(request, cats):
-	category_posts = Post.objects.filter(category=cats.replace('-',' '))
+	category_posts = Post.objects.filter(category= cats.replace('-',' '))
 	return render(request, 'categories.html', {'cats':cats.replace('-',' '), 'category_posts':category_posts})
 
 class ArticleDetailView(DetailView):
@@ -40,6 +40,8 @@ class AddPostView(CreateView):
 	template_name = 'add_post.html'
 	#fields = '__all__'
 	#fields = 'title', 'body'
+	'author' == User.username
+	
 
 class UpdatePostView(UpdateView):
 	model = Post
@@ -56,5 +58,5 @@ class AddCategoryView(CreateView):
 	model = Category
 	#form_class = PostForm
 	template_name = 'add_category.html'
-	fields = '__all__'
-	#fields = 'title', 'body'
+	#fields = '__all__'
+	fields = ('title', 'title_tag', 'body')

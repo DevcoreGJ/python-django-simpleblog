@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 <div class="container-fluid">
 {% block content %}
+
+<!--current user: {{user.id}}
+post author: {{post.author.id}}-->
 {% if user.is_authenticated %}
 <div class="card" align=center>
 <div class="card-body" align=center>
 <h1 class="card-title"align=center>{{ post.title }}</h1> <!--blog post title referenced -->
 <h2 class="card-subtitle mb-2 text-muted" align=center >By: {{ post.author.username }} - 
 {{post.post_date}} - <a href="{% url 'category' post.category|slugify %}"> {{ post.category }} </a></h2>
-
+{% if user.id == post.author.id%}
 <small><a href="{% url 'update_post' post.pk %}" class="btn btn-secondary btn-sm">Edit</a> 
 <a href="{% url 'delete_post' post.pk %}" class="btn btn-danger btn-sm">Delete</a></small></h4> <!-- referenced the defined user name of the author -->
+{% endif %}
 <hr>
 <br/>
 <p class="card-text" align=center> {{ post.body|safe }}</p> <!-- blog title -->
@@ -29,7 +33,6 @@
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
 
 {% endif %}
-
 {% endblock %}
 </div>
 </div>

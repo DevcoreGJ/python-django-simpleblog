@@ -14,6 +14,11 @@
 		<button class="btn btn-primary" align= center>Post</button>
 </div>
 
+<script>
+	var name = "{{user.id}}";
+	document.getElementById("author_box").value = name;
+</script>
+
 {% else %}
 
 	<p>You are not allowed here! (and you know it...)</p><br />
