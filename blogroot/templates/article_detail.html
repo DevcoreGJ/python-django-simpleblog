@@ -17,6 +17,13 @@ post author: {{post.author.id}}-->
 <hr>
 <br/>
 <p class="card-text" align=center> {{ post.body|safe }}</p> <!-- blog title -->
+<br />
+<hr>
+<form action="{% url 'like_post' post.pk %}" method="POST">
+	{% csrf_token %}
+	<button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-secondary">Like</button>
+	
+
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
 
 {% else %}

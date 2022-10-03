@@ -1,15 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Post, Category, User
 from .forms import PostForm, EditForm
-from django.urls import reverse_lazy
-
+from django.urls import reverse_lazy, reverse
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 '''
 def home(request):
 	return render(request, 'home.html', {})
 '''
+def LikeView(request, pk):
+	post = get_object_or_404(Post, id=request.POST.get('post_id'))
+	post.likes.add(request.user)
+	return HttpResponseRedirect(reverse('article_detail', args=[str(pk)]))
+
 class HomeView(ListView): # pass in ListView
 	model = Post #so our post will appear as a list on homepage
 	template_name = 'home.html' #home.html template already created
@@ -58,5 +63,5 @@ class AddCategoryView(CreateView):
 	model = Category
 	#form_class = PostForm
 	template_name = 'add_category.html'
-	#fields = '__all__'
-	fields = ('title', 'title_tag', 'body')
+	fields = '__all__'
+	#fields = 'title', 'title_tag', 'body'
