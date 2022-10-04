@@ -2,11 +2,12 @@
 
 {% block title %}Register{% endblock %}
 {% block content %}
-
+<h1 class="display-1" align="center"><u> Apolloblog </u></h1><br/>
 <h1 align= center>Register</h1>
+<hr>
 <br /> <br />
-<div class="form-group" align=center>
-	<form method="POST" align=center>
+<div class="form-group">
+	<form method="POST">
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button class="btn btn-primary" align=center>Register</button>
