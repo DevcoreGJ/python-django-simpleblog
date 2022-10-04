@@ -12,7 +12,16 @@ def home(request):
 '''
 def LikeView(request, pk):
 	post = get_object_or_404(Post, id=request.POST.get('post_id'))
-	post.likes.add(request.user)
+	liked = False
+	#pass in a request to filter the id of a user that is logged in
+	#look up if a like has been liked by user id and if it exists do something.
+	#if liked by the auth'd user id exists, remove it.
+	if post.likes.filter(id=request.user.id).exists():
+		post.likes.remove(request.user)
+		liked = False
+	else: #if not liked add the like.
+		post.likes.add(request.user)
+		liked = True
 	return HttpResponseRedirect(reverse('article_detail', args=[str(pk)]))
 
 class HomeView(ListView): # pass in ListView
@@ -38,6 +47,28 @@ def CategoryView(request, cats):
 class ArticleDetailView(DetailView):
 	model = Post
 	template_name = 'article_detail.html'
+	
+	def get_context_data(self, *args, **kwargs):
+		cat_menu = Category.objects.all()
+		context = super(ArticleDetailView, self).get_context_data(*args, **kwargs)
+		
+		post_by_id = get_object_or_404(Post, id=self.kwargs['pk'])#Looks up article detail by id
+		total_likes = post_by_id.total_likes()
+		#likes default state is false
+		#references itself instead of passing request argument
+		#request id from user on the post id, check if a like exists
+		#if not, likes specific post
+		liked = False
+		if post_by_id.likes.filter(id=self.request.user.id).exists():
+			liked = True
+
+
+		context["cat_menu"] = cat_menu
+		context["total_likes"] = total_likes #how many likes to display on article_detail
+		#pass llked variable in to context
+		#now liked is passed to context it is possible to use on HTML page
+		context["liked"] = liked
+		return context
 
 class AddPostView(CreateView):
 	model = Post

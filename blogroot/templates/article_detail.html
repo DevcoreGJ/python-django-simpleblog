@@ -21,7 +21,15 @@ post author: {{post.author.id}}-->
 <hr>
 <form action="{% url 'like_post' post.pk %}" method="POST">
 	{% csrf_token %}
+
+	{% if liked %}
+	<button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-danger">Unlike</button>
+	{% else %}
 	<button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-secondary">Like</button>
+	{% endif %}
+	 {{ total_likes }} Likes
+	}
+	}
 	
 
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
@@ -37,7 +45,9 @@ post author: {{post.author.id}}-->
 <hr>
 <br/>
 <p class="card-text"> {{ post.body|safe }}</p> <!-- blog title -->
-<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+<br />
+<hr>
+<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a> {{ total_likes }} Like - <a href ="{% url 'login' %}"> Log in to like.</a>
 
 {% endif %}
 {% endblock %}
