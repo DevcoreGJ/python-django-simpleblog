@@ -10,6 +10,7 @@
 <div class="form-group" align= center>
 	<form method="POST">
 		{% csrf_token %}
+		{{ form.media }}
 		{{ form.as_p }}
 		<button class="btn btn-primary" align= center>Post</button>
 </div>

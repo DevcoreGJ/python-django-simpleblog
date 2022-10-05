@@ -22,6 +22,12 @@ class SignUpForm(UserCreationForm):
 		fields = ('username','first_name','last_name','email','password1','password2')
 
 	def __init__(self, *args, **kwargs):
+#super returns super object within a method as a proxy for the class.
+#passing SignUpForm, and itself.
+#initialise *args passing through any number number of positional arguements.
+#**kwargs which takes any number of keyword arguements.
+#in both instances args and kwargs are both standard naming conventions, * & ** respectively
+#are what is the important part.
 		super(SignUpForm, self).__init__(*args, **kwargs)
 
 		self.fields['username'].widget.attrs['class'] = 'form-control'
