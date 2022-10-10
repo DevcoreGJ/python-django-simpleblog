@@ -19,7 +19,10 @@
 	 	
 	 	<h4 class="card-subtitle mb-2 text-muted" align= center> - {{ post.author.username }} - <a href="{% url 'category' post.category|slugify %}"> {{ post.category }} </a></h4>
 	 	
-	 	<p class ="card-text" align= center> {{ post.body | slice:":200"|safe }} </p> <br />
+	 	<p class ="card-text" align= center> 
+	 	{{post.snippet}} </p> <br>
+	 	<!--old example of code snippet on front page-->
+	 	<!--{{ post.body | slice:":200"|safe }} </p> <br />-->
 	 	
 	 	{% if user.is_authenticated %}
 	 		{% if user.id == post.author.id%}

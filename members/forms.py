@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
 
@@ -33,3 +33,26 @@ class SignUpForm(UserCreationForm):
 		self.fields['username'].widget.attrs['class'] = 'form-control'
 		self.fields['password1'].widget.attrs['class'] = 'form-control'
 		self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+'''
+class UserChangeForm(UserCreationForm):
+	class Meta:
+		model = User
+		fields = ('last_login','username','first_name','last_name','email',)
+
+		def __init__(self, *args, **kwargs):
+#super returns super object within a method as a proxy for the class.
+#passing UserChangeForm, and itself.
+#initialise *args passing through any number number of positional arguements.
+#**kwargs which takes any number of keyword arguements.
+#in both instances args and kwargs are both standard naming conventions, * & ** respectively
+#are what is the important part.
+		super(UserChangeForm, self).__init__(*args, **kwargs)
+
+		self.fields['username'].widget.attrs['class'] = 'form-control'
+		self.fields['password1'].widget.attrs['class'] = 'form-control'
+		self.fields['password2'].widget.attrs['class'] = 'form-control'
+		self.fields['first_name'].widget.attrs['class'] = 'form-control'
+		self.fields['last_name'].widget.attrs['class'] = 'form-control'
+		self.fields['email'].widget.attrs['class'] = 'form-control'
+		'''

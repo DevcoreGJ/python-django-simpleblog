@@ -20,6 +20,9 @@ post author: {{post.author.id}}-->
 <br />
 <hr>
 <form action="{% url 'like_post' post.pk %}" method="POST">
+	<!--template tag referencing Cross Site Request Forgeries
+	middleware providing easy protection thorough a simple tag.
+	 -->
 	{% csrf_token %}
 
 	{% if liked %}

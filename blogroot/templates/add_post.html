@@ -9,8 +9,13 @@
 <br /> <br />
 <div class="form-group" align= center>
 	<form method="POST">
+<!--template tag referencing Cross Site Request Forgeries
+	middleware providing easy protection thorough a simple tag.
+	 -->
 		{% csrf_token %}
+<!--Form media allows ckeditor that is referenced on the body-->
 		{{ form.media }}
+<!--Form as p rrelates to translating paragraph tag objects in to formfields-->
 		{{ form.as_p }}
 		<button class="btn btn-primary" align= center>Post</button>
 </div>

@@ -30,10 +30,11 @@ class Post(models.Model):
 	#author = models.ForeignKey(User, on_delete=models.NULL) #if user is deleted all related posts are
 	author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 	#body = models.TextField() #input field for text
-	body = RichTextField(blank=True, null=True)
+	body = RichTextField(blank=True, null=True) #initialise ckeditor on body
 	name = "Apollo Blog"
 	post_date = models.DateField(auto_now_add = True)
 	category = models.CharField(max_length=255, default='development')
+	snippet = models.CharField(max_length=140)
 	likes = models.ManyToManyField(User, related_name='blog_posts')
 	
 	def total_likes(self):

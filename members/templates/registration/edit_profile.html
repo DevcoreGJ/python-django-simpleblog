@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+<h1 class="display-1" align="center"><u> Apolloblog </u></h1><br/>
+<h1 align= center>Edit Profile</h1>
+<hr>
+<br /> <br />
+<div class="form-group">
+	<form method="POST">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button class="btn btn-primary" align=center>Update Profile</button>
+</div>
+
+{% endblock %}
