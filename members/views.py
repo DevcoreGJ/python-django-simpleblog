@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.views import generic
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
-from django.urls import reverse_lazy
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+#originally our change password name was using auth views module.
+#This was rep;aced with a bespoke view class.
 from django.contrib.auth.views import PasswordChangeView
+
+from django.urls import reverse_lazy
 from .forms import SignUpForm, EditProfileForm, PasswordChangingForm
 # Create your views here.
 
@@ -27,9 +31,14 @@ naming the form.
 
 '''
 class PasswordsChangeView(PasswordChangeView):
-	form_class = PasswordChangingForm
+	#this new form doesn't have the weird bullet points.
+	#They now appear as dynamic error messages if you make a mistake.
 	#from_class = PasswordChangeForm
-	success_url = reverse_lazy('home')
+	form_class = PasswordChangingForm
+	success_url = reverse_lazy('password_success')
+	#success_url = reverse_lazy('home')
+def password_success(request):
+	return render(request, 'registration/password_success.html', {})
 
 class UserRegisterView(generic.CreateView):
 	form_class = SignUpForm
