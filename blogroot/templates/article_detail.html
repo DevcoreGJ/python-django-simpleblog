@@ -5,6 +5,7 @@
 <!--current user: {{user.id}}
 post author: {{post.author.id}}-->
 {% if user.is_authenticated %}
+
 <div class="card" align=center>
 <div class="card-body" align=center>
 <h1 class="card-title"align=center>{{ post.title }}</h1> <!--blog post title referenced -->
@@ -16,6 +17,9 @@ post author: {{post.author.id}}-->
 {% endif %}
 <hr>
 <br/>
+{% if post.header_image %}
+	<img class="card-img-top" src="{{ post.header_image.url }}" alt="Card image cap"> <br/> <br/>
+	{% endif %}
 <p class="card-text" align=center> {{ post.body|safe }}</p> <!-- blog title -->
 <br />
 <hr>
@@ -28,14 +32,64 @@ post author: {{post.author.id}}-->
 	{% if liked %}
 	<button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-danger">Unlike</button>
 	{% else %}
+	<img src= "{{ post.author.profile.profile_pic.url}}" width=50 height=50 class="rounded-circle">
 	<button type="submit", name="post_id", value="{{ post.id }}", class="btn btn-secondary">Like</button>
 	{% endif %}
 	 {{ total_likes }} Likes
-	}
-	}
-	
+	<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
-<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+
+<!-- user profile card! -->
+
+
+<div class="card mb-3">
+  <div class="row no-gutters">
+  	<div class="col-md-2">
+  	<img src= 
+  	"{{ post.author.profile.profile_pic.url}}"
+  	 width=150 height=150 class="rounded-circle">
+  	</div>
+    <div class="col-md-10">
+      <div class="card-body">
+    <h5 class="card-title">
+        {{ post.author.username }}
+    </h5>
+        <p class="card-text"><small class="text-muted">
+
+        	{% if post.author.profile.website_url %}
+        		<a href="{{ post.author.profile.website_url }}"> | Website </a>
+        	{% endif %}
+
+        	{% if post.author.profile.fb_url %}
+        		<a href="{{ post.author.profile.fb_url }}"> | Facebook </a>
+        	{% endif %}
+
+        	{% if post.author.profile.twitter_url %}
+        		<a href="{{ post.author.profile.twitter_url }}"> | Twitter </a>
+        	{% endif %}
+
+        	{% if post.author.profile.instagram_url %}
+        		<a href="{{ post.author.profile.instagram_url }}"> | Instagram </a>
+        	{% endif %}
+
+        	{% if post.author.profile.pinterest_url %}
+        		<a href="{{ post.author.profile.pinterest_url }}"> | Pinterest</a>
+        	{% endif %}
+
+        </small></p>
+    
+        <p class="card-text">
+        {{ post.author.profile.bio }}
+    </p>
+        <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
 
 {% else %}
 
@@ -44,15 +98,24 @@ post author: {{post.author.id}}-->
 <h1 class="card-title"align= center>{{ post.title }}</h1> <!--blog post title referenced -->
 <h2 class="card-subtitle mb-2 text-muted" align= center>By: {{ post.author.username }} - 
 {{post.post_date}}</h2>
+{% if post.header_image %}
+	<img class="card-img-top" src="{{ post.header_image.url }}" alt="Card image cap"> <br/> <br/>
+{% endif %}
 
-<hr>
+<br/>
 <br/>
 <p class="card-text"> {{ post.body|safe }}</p> <!-- blog title -->
+
 <br />
 <hr>
 <a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a> {{ total_likes }} Like - <a href ="{% url 'login' %}"> Log in to like.</a>
 
 {% endif %}
+
+<br/><br/>
+<!--
+height and width is a placeholder until we add another way to handle images.
+--> 
 {% endblock %}
 </div>
 </div>

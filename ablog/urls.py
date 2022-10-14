@@ -16,9 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+#further imports required since adding 
+
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blogroot.urls')),
     path('members/', include('django.contrib.auth.urls')),
     path('members/', include('members.urls')),
-]
+
+
+# unexplained + sign but it works... below imports the media url from settings
+# that was previously defined
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

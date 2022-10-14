@@ -23,8 +23,23 @@ class Category(models.Model):
 		#return reverse('article_detail', args=(str(self.id)) )
 		return reverse('home')
 
+class Profile(models.Model):
+	user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+	bio = models.TextField()
+	profile_pic = models.ImageField(null=True, blank=True, upload_to="images/profile/")
+		# returns a string that is imported from the user section.
+	website_url = models.CharField(max_length=255, null=True, blank=True,)
+	FB_url = models.CharField(max_length=255, null=True, blank=True,)
+	twitter_url = models.CharField(max_length=255, null=True, blank=True,)
+	instagram_url = models.CharField(max_length=255, null=True, blank=True,)
+	pinterest_url = models.CharField(max_length=255, null=True, blank=True,)
+
+	def __str__(self):
+		return str(self.user)
+
 class Post(models.Model):
 	title = models.CharField(max_length=255) #max char length
+	header_image = models.ImageField(null=True, blank=True, upload_to="images/")
 	title_tag = models.CharField(max_length=255)
 	#author = models.CharField(max_length=50)
 	#author = models.ForeignKey(User, on_delete=models.NULL) #if user is deleted all related posts are

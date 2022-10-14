@@ -19,7 +19,7 @@ class PostForm(forms.ModelForm):
 
 		class Meta:
 			model = Post
-			fields = ('title', 'title_tag', 'author', 'category', 'body','snippet')
+			fields = ('title', 'title_tag', 'author', 'category', 'body','snippet','header_image')
 
 			def __init__(self, *args, **kwargs):
 				# first call parent's constructor
