@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Profile Page!{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+	{% if user.id == profile.user.id %}
+	<h1 class="display-1"align= center>Edit Profile Page...</h1>
+	<br /> <br />
+	<div class="form-group" align= center>
+		<form method="POST" enctype="multipart/form-data">
+	<!--template tag referencing Cross Site Request Forgeries
+		middleware providing easy protection thorough a simple tag.
+		 -->
+			{% csrf_token %}
+	<!--Form media allows ckeditor that is referenced on the body-->
+			<!--{{ form.media }}-->
+	<!--Form as p rrelates to translating paragraph tag objects in to formfields-->
+			{{ form.as_p }}
+			<button class="btn btn-primary" align= center>Update Profile Page</button>
+	</div>
+
+	{% else %}
+		You're not authorised to edit this page. <br />
+		<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+	{% endif %}
+
+{% else %}
+
+	<p>You are not allowed here! (and you know it...)</p><br />
+
+	<a href="{% url 'home' %}" class="btn btn-primary"> Back to Home </a>
+{% endif %}
+{% endblock %}

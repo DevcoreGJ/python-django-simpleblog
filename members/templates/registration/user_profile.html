@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<title> {% block title %} Apollo Blog {% endblock %} </title>
+	
+<h1> User Profile... </h1>
+
+<!--{{ page_user }}-->
+
+<!-- user profile card! -->
+
+
+<div class="card mb-3">
+
+  <div class="row no-gutters">
+  	<div class="col-md-2">
+{% if page_user.profile_pic %} 
+  	<img src= "{{ page_user.profile_pic.url}}"
+  	width=150 height=150 class="rounded-circle">
+{% else %}
+  	 <img src="{% static 'theblog/images/default.png' %}">
+
+{% endif %}
+
+
+</a>
+</div>
+<div class="col-md-10">
+  <div class="card-body">
+
+
+<h5 class="card-title">
+   {{ page_user.user.username }}
+</h5>
+	
+	<p class="card-text"><small class="text-muted">
+
+    	{% if page_user.profile.website_url %}
+    		<a href="{{ page_user.website_url }}"> Website </a>
+    	{% endif %}
+
+    	{% if page_user.profile.fb_url %}
+    		<a href="{{ page_user.fb_url }}"> | Facebook </a>
+    	{% endif %}
+
+    	{% if page_user.profile.twitter_url %}
+    		<a href="{{ page_user.twitter_url }}"> | Twitter </a>
+    	{% endif %}
+
+    	{% if page_user.profile.instagram_url %}
+    		<a href="{{ page_user.instagram_url }}"> | Instagram </a>
+    	{% endif %}
+
+    	{% if page_user.profile.pinterest_url %}
+    		<a href="{{ page_user.pinterest_url }}"> | Pinterest</a>
+    	{% endif %}
+
+    </small></p>
+
+    <p class="card-text">
+    {{ page_user.bio }}
+</p>
+    <!--<p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+  </div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

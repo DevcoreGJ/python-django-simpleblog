@@ -1,7 +1,7 @@
 #initialise the django framework urls module
 from django.urls import path
 #from . import views
-from .views import UserRegisterView, UserEditView, PasswordsChangeView
+from .views import UserRegisterView, UserEditView, PasswordsChangeView, ShowProfilePageView, EditProfilePageView
 #from django.contrib.auth import views as auth_views
 
 from . import views
@@ -33,5 +33,8 @@ path('password/', PasswordsChangeView.as_view(template_name='registration/change
 #path('login/', UserLoginView.as_view(), name='register')
 path('password_success', views.password_success, name='password_success'),
 # the above path is going to relate to a functional view
+
+path('<int:pk>/profile/', ShowProfilePageView.as_view(), name='show_profile_page'),
+path('<int:pk>/edit_profile_page/', EditProfilePageView.as_view(), name='edit_profile_page'),
 ]
     
