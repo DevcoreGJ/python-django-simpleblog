@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Comment On Blog!{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<h1 class="display-1"align= center>Add Comment</h1>
+<br /> <br />
+<div class="form-group" align= center>
+	<form method="POST" enctype="form-data">
+<!--template tag referencing Cross Site Request Forgeries
+	middleware providing easy protection thorough a simple tag.
+	 -->
+		{% csrf_token %}
+<!--Form as p rrelates to translating paragraph tag objects in to formfields-->
+		{{ form.as_p }}
+		<button class="btn btn-primary" align= center>Add Comment</button>
+</div>
+
+<script>
+	var name = "{{user.id}}";
+	document.getElementById("author_box").value = name;
+</script>
+
+{% else %}
+
+	<p>Please log in to comment</p><br />
+	<a href="{% url 'login' %}" class="btn btn-primary"> Login </a>
+
+	{% endif %}
+{% endblock %}

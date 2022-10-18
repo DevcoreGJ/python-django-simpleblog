@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
-from .models import Post, Category, User
+from .models import Post, Category, User, Comment
 #from django.contrib.auth.models import User
 
 #cats = [('coding','coding'),('sports','sports'),('entertainment','entertainment')]
@@ -71,4 +71,19 @@ class EditProfileForm(UserChangeForm):
 	class Meta:
 		model = User
 		fields = ('username', 'first_name', 'last_name', 'email', 'is_superuser','is_active','date_joined',)
-	
+
+class CommentForm(forms.ModelForm):
+	class Meta:
+		model = Comment
+		fields = ('author','body')
+
+		widgets = {
+			'author': forms.TextInput(attrs={'class': 'form-control','value':'','id':'author_box','readonly' : True, 'type': 'hidden'}),
+			'body': forms.Textarea(attrs={'class': 'form-control'}),
+
+		}
+		def __init__(self, *args, **kwargs):
+				# first call parent's constructor
+				super(CommentForm, self).__init__(*args, **kwargs)
+				# there's a `fields` property now
+				self.fields['author'].required = False

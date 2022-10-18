@@ -66,7 +66,7 @@ class Comment(models.Model):
 #post is the foreign key that connects the comment model to the post model.
 	post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
 	#commenters name
-	name = models.CharField(max_length=255)
+	author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 	#what the content of the comment is
 	body = models.TextField()
 	#auto add date

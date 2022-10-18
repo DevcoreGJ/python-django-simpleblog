@@ -130,19 +130,29 @@ height and width is a placeholder until we add another way to handle images.
 
 <br/> <br/>
 <hr>
-<h2> Leave A Comment </h2>
+
+<h1 align="center"> Leave A Comment </h1>
+
+<!-- comment box -->
+
+<a href="{% url 'add_comment' post.pk %}"> Add a comment </a><br/>
+
+
 <hr>
+<br/>
+<br/>
+
 <!-- we can call the comment model due to the foreign key assossiciating it 
 	with the post model that is already being used to populate this page.-->
 <!-- model name is comment, foreign key is comments -->
 {% if not post.comments.all %}
-	No Comments Yet, Be The First! <a href="#">
+	No Comments Yet, Be The First!
 	Add One</a>
 {% else %}
 		{% for comment in post.comments.all %}
 		<strong>
 			<h3 class="text-muted">
-			<a href ="#" > {{ comment.name }} </a> </h3> <small> {{ comment.date_added }} </small>
+			<a href ="#" > {{ comment.author }} </a> </h3> <small> {{ comment.date_added }} </small>
 		
 		</strong>
 		<br/>
@@ -150,6 +160,7 @@ height and width is a placeholder until we add another way to handle images.
 		<hr>
 	{% endfor %}
 	<hr>
+<a href="{% url 'add_comment' post.pk %}"> Add a comment </a>
 {% endif %}
 
 {% endblock %}
