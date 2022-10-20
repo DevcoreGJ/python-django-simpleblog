@@ -4,15 +4,16 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 
 #imported as class ShowProfilePageView inherits DetailView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, CreateView
 
 #originally our change password name was using auth views module.
 #This was rep;aced with a bespoke view class.
 from django.contrib.auth.views import PasswordChangeView
 
 from django.urls import reverse_lazy
-from .forms import SignUpForm, EditProfileForm, PasswordChangingForm
+from .forms import SignUpForm, EditProfileForm, PasswordChangingForm, ProfilePageForm
 from blogroot.models import Profile
+
 
 
 # Create your views here.
@@ -37,6 +38,36 @@ Further objects can be called again by delimitting with a comma and
 naming the form.
 
 '''
+
+class CreateProfilePageView(CreateView): #This class is my view
+	#When a View Class is created we need to tell it what model to used:
+	model = Profile #This relates to my already created model.
+	# It handles data for the view.
+	
+	form_class = ProfilePageForm
+
+	#all members app templates reside in registration folder.
+	#what webpage is it modifying? point it to the the HTML file. 
+	template_name = "registration/create_user_profile_page.html" 
+	#^^^^^ this refers to my URL.
+	#Once made create the template file.
+	#urls need to be registered in urls.py
+
+	#fields = '__all__' replaced by profile page form
+
+	#allows our project to figure out which user is filling out the form.
+	#create a function.
+	#if the form is valid pass in arguments from CreateProfilePageView.
+	#Pass arguements from the form being referenced.
+	def form_valid(self, form):
+		#this specific form session calls current user credentials
+		#get CreateProfilePageForm user object from this instance
+		#overload by setting the user from Profile model 
+		form.instance.user = self.request.user
+		#Super allows method access to CreateProfilePageView.
+		#returns from class form_valid, passing arguements from form
+		return super().form_valid(form)
+
 
 class EditProfilePageView(generic.UpdateView):
 	model = Profile

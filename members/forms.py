@@ -1,6 +1,24 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
+from blogroot.models import Profile
+
+class ProfilePageForm(forms.ModelForm):
+	class Meta:
+
+		model = Profile
+		fields = ('bio','profile_pic','website_url','FB_url','twitter_url','instagram_url','pinterest_url')
+
+		widgets = {
+			'bio' : forms.Textarea(attrs={'class':'form-control'}),
+			#'profile_pic' : forms.TextInput(attrs={'class':'form-control'}),
+			'website_url' : forms.TextInput(attrs={'class':'form-control'}),
+			'FB_url' : forms.TextInput(attrs={'class':'form-control'}),
+			'twitter_url' : forms.TextInput(attrs={'class':'form-control'}),
+			'instagram_url' : forms.TextInput(attrs={'class':'form-control'}),
+			'pinterest_url' : forms.TextInput(attrs={'class':'form-control'}),
+
+		}
 
 class SignUpForm(UserCreationForm):
 #added additional fields to register form
@@ -9,9 +27,9 @@ class SignUpForm(UserCreationForm):
 #last_name field
 #to sign up form. Applied forms widget.
 #applied bootstrap form-control html attribute.
-	email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control','type':'password'}))
-	first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control','type':'password'}))
-	last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control','type':'password'}))
+	email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control','type':'EmailField'}))
+	first_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control','type':'CharField'}))
+	last_name = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control','type':'CharField'}))
 #although these are now how I want them, manipulating
 #fields unlisted here requires a method
 #method is defined beneath meta*

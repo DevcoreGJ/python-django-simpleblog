@@ -32,19 +32,10 @@
           <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
         </li>
 
-        <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Profile</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a>
-      <a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile Page</a>
-      <a class="dropdown-item" href="% url 'show_profile_page' post.user.profile.id %}">Show Profile Page</a>
-    </div>
-  </li>
 
-        <!--<li class="nav-item">
-          <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
-        </li>-->
-        
+
+
+
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
@@ -84,6 +75,42 @@
 
       {% endif %}
     </ul>
+    <u class="navbar-nav ml-auto">
+      <!-- profile dropdown -->
+
+  {% if user.is_authenticated %}
+    <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
+    <div class="dropdown-menu dropdown-menu-right">
+      
+      {% if user.profile.id %}
+
+        <a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile Page</a>
+        
+        <a class="dropdown-item" href="{% url 'show_profile_page' user.profile.id %}">Show Profile Page</a>
+
+        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+    {% else %}
+
+        <a class="dropdown-item" href="{% url 'create_profile_page' %}">Create Profile Page</a>
+
+      {% endif %}
+      <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a>
+
+      
+        </li>
+    {% endif %}  
+    </div>
+  </li>
+
+        <!--<li class="nav-item">
+          <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
+        </li>-->
+
+
+<!-- end of profile dropdown -->
+
+    </u>
   </div>
 </nav>
 <br/>    
